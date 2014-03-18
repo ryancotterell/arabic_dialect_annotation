@@ -1,0 +1,379 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{lrec2006}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\usepackage{float}
+\usepackage{arabtex}
+\usepackage{utf8}
+
+\title{An Algerian Arabic-French Code-Switched Corpus}
+
+\name{Ryan Cotterell$^1$, Adithya Renduchintala$^1$, Naomi Saphra$^1$, Chris Callison-Burch$^2$}
+
+\address{ $^1$ CLSP, Johns Hopkins University; $^2$CIS, University of Pennsylvania  \\ 
+              Baltimore, MD, USA; Philadelphia, PA, USA \\
+              \{ryan.cotterell, adithya.renduchintala,nsaphra\}@jhu.edu; ccb@cis.upenn.edu}
+
+\abstract{ Arabic is not just one language, but rather a collection of
+dialects in addition to Modern Standard Arabic (MSA). While MSA is
+used in formal situations, dialects are the language of every day
+life. Until recently, there was very little dialectal Arabic in
+written form. With the advent of social-media, however, the landscape
+has changed.  We provide the first romanized code-switched Algerian
+Arabic-French corpus annotated for word-level language id. We review
+the history and sociological factors that make the linguistic
+situation in Algerian unique and highlight the value of this corpus to
+the natural language processing and linguistics communities. To build
+this corpus, we crawled an Algerian newspaper and extracted the
+comments from the news story. We discuss the informal nature of the
+language in the corpus and the challenges it will
+present. Additionally, we provide a preliminary analysis of the
+corpus. We then discuss some potential uses of our corpus of interest
+to the computational linguistics community. \newline
+\\\Keywords{code-switching, Algerian Arabic, romanized Arabic, French}}
+
+
+\begin{document}
+\setcode{utf8}
+
+
+\maketitleabstract
+
+
+\section{Introduction}
+Language identification systems have long operated under the
+assumption that text is written in a single language. As social media
+becomes a more prominent mode of communication, such systems are
+confronting text that increasingly challenges the monolingual
+assumption. More than half the world's population is bilingual and
+information communication is often code-switched, reflecting the need
+for a deeper understanding of code-switching in relation to NLP
+tasks. Recent work has proposed both supervised and unsupervised
+methods for \textit{word} level language id. Current methods, however,
+rely on the assumption that external resources exist, such as large
+non-code-switched corpora and dictionaries. These resources are not
+available for all languages, for instance in Algerian vernacular
+Arabic, a dialect often code-switched with French. We are releasing a
+corpus of romanized Algerian Arabic and French scraped from the
+comments sections of Echorouk, an Algerian daily newspaper with the
+second-largest reader base of any Arabic paper. This is the only
+significant corpus of romanized Arabic known to the authors and
+additionally it is the largest corpus of code-switched data to our
+knowledge. Such a resource is necessary as romanized Arabic is
+becoming increasingly popular on the internet. The corpus will also be
+of use for the linguistic study of code-switching. Much of previous
+code-switching research has focused on data collected from field work,
+and a found dataset like ours could provide an interesting perspective
+on the use of code-switching in conversation.
+
+\section{Code-switching}
+
+Code-switching is a linguistic phenomenon wherein speakers switch
+between two or more languages in conversation, often within a single
+utterance \cite{bullock2009cambridge}.  It can be viewed as a
+sociolinguistic phenomenon where situation and topic influence the
+choice of language \cite{kachru1977linguistic}. At this point it is
+important to make the distinction between \emph{code-switching} and
+\emph{borrowing}%, which has implications for annotation and will be
+%discussed later
+. \emph{Borrowing} is the act of using a foreign word
+without recourse to syntactic or morphological properties of that
+language and often occurs with phonological
+assimilation. \emph{Code-switching}, on the other hand, involves
+switching between languages in which the speakers are fluent, and can
+in effect be viewed as changing the grammar in use. Some linguists
+have even proposed a scale of code-switching, positing the existence
+of a continuum between \emph{borrowing} and \emph{code switching} \cite{auer1999codeswitching}.
+Code-switching points (the times at which speakers change language)
+and the context around which switching occurs are also of interest to
+linguists. These points often lie within a sentence and their position
+is influenced by the syntax of the respective languages. Poplack
+\cite{poplack1988contrasting} posited that code-switching points
+cannot occur within a constituent. Recent work, however, has found
+that many speakers relax this constraint. The Matrix Language-Frame
+(MLF) model is one theory has gained traction \cite{myers1993common}
+to explain code-switching patterns.  MLF proposes that there is a
+Matrix Language (ML) and an Embedded Language (EL). The ML is the more
+dominant language and is often the language which the speaker
+identifies as their native tongue. The EL is then inserted into the ML
+at certain grammatical frames. Within this framework, further work has
+gone into the exact syntactic and morphological contexts that allow
+for code-switching points \cite{myers2001calculating}.
+
+\section{Code-Switching in North Africa}
+Code-switching in North African Arabic is an established phenomenon
+that has been studied by the linguistics community
+\cite{bentahila1983syntax}. It dates back to the initial French
+colonization of North Africa. North Africa is also home to many
+cultures, a fact which potentially affects language use and code
+switching in particular. Until recently, mixed language communication
+has been observed mainly as a spoken phenomenon. With the widespread
+use of computer-mediated communication, code-switching is becoming
+common in North African Arabic \cite{Salia-11}. Comments on news-feeds
+and social media outlets like Twitter and Facebook often contain
+code-switching.  North African Arabic is not the only language to
+appear in code-switching writing. A body of recent sociolinguistics
+work has considered the phenomenon in various settings. Swiss-German
+and German code-switching in chat rooms was analyzed in
+\newcite{siebenhaar2006code} and \newcite{callahan2004spanish}
+considered Spanish and English code-switching in a written corpus.
+
+\section{Related Work}
+From a computational perspective, code-switching has received
+relatively little attention. \newcite{joshi1982processing} provides
+for parsing mixed sentences. More recently,
+\newcite{rosner2007tagging} focused on processing code-switched
+SMS. \newcite{solorio2008learning} trained classifiers to predict
+code-switching points in Spanish and English. \newcite{nguyen2013word}
+also focused on word level language identification in Dutch-Turkish
+news commentary. To our knowledge, \newcite{elfardy2012token} is the
+only computational work on Arabic code-switching done to date. That
+work does not include romanized Arabic. Many languages written in a
+non-Roman script are \emph{romanized} on the internet. This practice
+presents a problem for standard NLP tools that are trained on the
+language with its standard orthography \cite{irvine2012processing}. We
+believe that this type of romanized data will become more pervasive as
+more users employ computer-mediated communication. More information
+will be generated in such settings, and it is critical for future NLP
+systems to be able to process the data produced. The corpus we are
+presenting is a step in this direction.
+
+\section{Data Collection}
+We used a corpus that is crawled from an Algerian newspaper
+website. We scraped 598047 pages in September 2012. These fora are
+rich, not only in dialectal Arabic content, but also in French. The
+corpus contains discussion on a wide ranging set of issues including
+domestic politics, international relations, religion, and sporting
+events.  We extracted 6949 comments, containing 150k words in
+total. We separated the comments section from the main article on each
+page and stripped HTML tags and other non-user generated content. The
+metadata was stripped in an attempt to preserve anonymity.  The Arabic
+portion of the corpus was annotated for sentence level dialect on
+Mechanical Turk.  %(TODO Cotterell 2014).
+
+We separated all the comments, in which more than half the non-white
+space characters were in the Roman alphabet, determining these to be
+romanized.  We did no further processing, e.g. tokenization.  The
+final data set contains 339504 annotated comments with an average
+length of 19 tokens, as determined by separating on white space and
+punctuation. Our corpus has 493038 types and 6718502 tokens, and is
+formatted in JSON.
+\section{Romanization of Arabic}
+This corpus is unique in that it is the first large corpus to the
+authors' knowledge that is composed of of an Arabic dialect written in
+romanized form. Romanized Arabic is particularly difficult because
+there is no standard form of romanization used across the Arab
+world. In order to use standard NLP tools on such corpora, it is often
+necessary to \emph{deromanize} the corpus. In the case of Urdu, this
+task has been successfully completed using standard Machine
+Translation software \cite{irvine2012processing}.
+
+Arabic written in the Latin alphabet, often dubbed \emph{arabizi}, is
+extremely common on the internet and SMS.  The exact mapping from the
+Arabic script onto the Latin alphabet varies significantly between
+regions.  The specific case of romanization by young speakers of Gulf
+Arabic in the United Arab Emirates is discussed thoroughly in
+\newcite{palfreyman2003funky}.  
+
+Figure \ref{fig:correspondence} expresses the most common mappings across the Arab
+world.  Algerians, and North Africans in general, tend to use
+romanizations that reflect French orthography: for instance \RL{ و}
+$\mapsto$ \texttt{ou}, \RL{ش} $\mapsto$ \texttt{ch}, \RL{ج} $\mapsto$
+\texttt{dj} and \RL{ا} $\mapsto$ \texttt{\`{e}} or \texttt{\'{e}}. 
+%We
+%illustrate this difference in figures 2 and 3.  In figure 2 we show
+%the frequency of the common transcriptions of \RL{إن شاء الله} (God
+%willing) with \RL{ش} $\mapsto$ \texttt{ch} and in figure 3 we show the
+%transcriptions with \RL{ش} $\mapsto$ \texttt{sh}. We see that the ones
+%in our corpus occur with \texttt{ch} occur about an order of magnitude
+%more often.
+To illustrate this difference consider the frequency of the common 
+transcriptions of \RL{إن شاء الله} (God willing)
+We see RL{ش} $\mapsto$ \texttt{ch} about an order of magnitude
+more often than \RL{ش} $\mapsto$ \texttt{sh}.
+
+This transcription variation makes it unlikely that a single,
+general-purpose Arabic deromanization tool will be enough, and such
+romanized corpora will need to be developed for other dialects as well
+in order to analyze the users romanization preferences on dialectal
+basis.
+
+\begin{figure}
+\centering
+\begin{tabular}{| l || r ||| l || r |  }
+  \hline                  
+  \textbf{Arabic} & \textbf{Arabizi} & \textbf{Arabic} & \textbf{Arabizi} \\ \hline  
+  \RL{ا} &  a  & \RL{ب}  & b, p    \\
+  \RL{ ت}  & t  & \RL{ ث}  &  th, s  \\
+  \RL{ ج }  & j, g  & \RL{ ح }  & 7, h \\
+  \RL{ خ }  &  7', 5  &\RL{ د }  & d  \\
+  \RL{ ذ }  & th z & \RL{ ر }  & r   \\
+  \RL{ ز }  & z  & \RL{ س }  & s  c \\
+  \RL{ ش }  & sh, ch  & \RL{ ص }  &  9  \\ 
+  \RL{ ض }  & 9', d  & \RL{ ط  }  & t   \\
+  \RL{ ظ  }  & th &  \RL{ ع }  & 3  \\
+  \RL{ غ  }  & gh, 3'  & \RL{ ف  }  & f   \\
+  \RL{ ق} & 8, 2, k, q & \RL{ ك  }  & k \\
+  \RL{ ل  }  & l  & \RL{ م }  & m  \\
+  \RL{ ن }  & n  & \RL{ ه  }  & h \\
+  \RL{ و  }  & w, o, ou & \RL{ ي  }  & y, i, e \\
+  \hline  
+\end{tabular}
+\caption{Correspondence Between Arabic Letters and Romanized Arabic \cite{yaghan2008arabizi}}
+\label{fig:correspondence}
+\end{figure}
+
+
+\section{Text Analysis}
+Because our Algerian corpus is from the length-constrained informal
+domain of online forum comments, it would be difficult to process
+meaningfully without normalizing beforehand. It exhibits extreme
+variation in spelling and grammar. Many forms of the same word may
+appear throughout our corpus. For example, we identified 69 variants
+of the common word \RL{إن شاء الله} alone. 70\% of all token types in
+our corpus appeared only once, so the OOV rate in this forum corpus
+can confound language processing systems without text normalization.
+ Several typical sources of variation for Arabic identified by
+\cite{Darwish:2012:LPA:2396761.2398658} were found in our corpus.
+\begin{itemize}
+\item The use of elongations, especially in the form of vowel repetition.
+\begin{quote}
+we ki ta3arfou wach rah testfadou ? {\bf hhhhh} cha3ab {\bf kar3adjiiiiiiiiii}
+\end{quote}
+
+\item Spelling mistakes, such as dropped or transposed characters.
+
+\item Abbreviations.
+
+\begin{quote}
+rah thablona bel {\bf BAC} had al3am !!!!!
+\end{quote}
+
+\item Emotional tokens and ejaculative abbreviations, such as the abbreviation ``lol'', borrowed from
+  English web speech, or emoticons.
+\end{itemize}
+
+In addition to these irregularities, our corpus contains variations
+particular to romanized Arabic text because there is no standardized way
+to transcribe Arabic orthography in this informal domain, Arabic words can be represented by multiple spellings. 
+%Fortunately, knowing that the dialect of Arabic represented here is Algerian, we can predict likely transcriptions of characters based on the preponderence of French in
+%Algerian language. 
+%For example, as stated previously,  we may encounter both \emph{sh} and
+%\emph{ch} as transciption variants of the same character, but in Algerian, French transcriptions dominate. Tables TODO and TODO demonstrate the distribution of the most common spelling
+%variants for \RL{إن شاء
+%  الله}. As we see, for these common variants the French transcription
+%\emph{ch} appears almost 40 times as often as \emph{sh}.
+
+% \begin{figure}
+% 		\caption{Frequency of spellings with \emph{sh} transcriptions}
+% 		\centering
+% 		\includegraphics[scale=0.5]{sh-spelling.png}
+% \end{figure}
+% \begin{figure}
+% \caption{Frequency of spellings with \emph{ch} transcriptions}
+% \centering
+% \includegraphics[scale=.5]{ch-spelling.png}
+% \end{figure}
+		
+
+\section{Example Posts} We present below a few example sentences that
+we have collected use the data collection methodology described above.
+\begin{itemize}
+  \item bezaf m3a saifi oalah mnkalifoha mairbahch\\(Had enough with
+Saifi.)
+   \item la howla wa la kowata il bi lah el3alier l3adim wa la
+yassa3oni an akoul anaho kllo chaye momkin ma3a ljazairyine\\ (For
+Gods Sake! I can just say that anything is possible with Algerians .)
+   \item we ki ta3arfou wach rah testfadou ? hhhhh cha3ab
+kar3adjiiiiiiiiii\\ (Don't try to know everything because it does not
+matter to you.)
+   \item 7ade said nchalah li lmontakhabina el3assekari nchalah yjibo
+natija mli7a bitawfiiiiiiiiiiiiiiiiik \ldots onchoriya chorouk
+stp\\(Good luck to our military team, I hope they get a good
+score. Good Luck! Say it chorouk!)
+   \item ya khawti tt simplement c bajiou l3arab o makanech fi tzayer
+kamla joueur kima lhadji et on vai ras le 27 03 2011 chkoun houma rjal
+liyestahlouha\\(My brothers he's simply the Baggio of Arabs, and there
+is none like Lhadji in Algeria, and on 27th of march 2011 we will see
+who wins.)
+   \item mais les filles ta3na ysedkou n'import quoi ana hada face
+book jamais cheftou khlah kalbi\\(Our girls believe anything, I have
+never seen this Facebook before.)
+\end{itemize}
+
+\section{Annotation Guidelines}
+Annotating for word level language identification in code-switched
+text is a difficult task because whether a word is code-switched is
+often more of a continuum than a binary decision. Place names form a
+simple example: \RL{باريس} (Paris) is an MSA word in that it is found
+in most Arabic dictionaries, but it is clearly of French origin.  On
+the other hand, \RL{فيديو} (video) is an example of a recent borrowing
+from European languages that should be considered an Arabic word. To
+simplify the decision, we made use of guidelines for dialectal Arabic
+annotation provided in \cite{elfardy2012token}.  Their guidelines were
+created for annotating world level language id in a corpus composed of
+mixed dialectal Arabic and MSA both written in the Arabic script. As
+we annotating two linguistically dissimilar languages, the same level
+of ambiguity does not arise.
+
+Further research in area of code-switching should focus on richer
+annotation schemata that are both linguistically motivated,
+i.e. taking into account the continuum of code-switching, and serve
+practical NLP needs. Another interesting area to focus on could be to
+annotate broad categories describing the type of
+code-switching. \newcite{Kecskes-02} describes three prominent
+patterns in code-switching (Insertion, Alternation and Congruent
+Lexicalization) based on Gibraltar data. Insertion involves adding
+lexical items from one language into the structure of the
+other. Alternation is similar to insertion except that larger chunks
+are inserted, rather than single tokens. Congruent Lexicalization is
+adding lexical items from different lexical inventories into a common
+grammar structure. The dataset could annotate each point of
+code-switching with these patterns of code-switching as well
+. This data set, however, is focused on only the
+points of code-switching.
+
+The annotators were presented with posts and asked to label each word,
+split on white space and punctuation.  They were given the choice of
+Arabic (A), French (F) and Other (O). We excluded punctuation from the
+annotation. Figure 4 shows the distribution of these tags in our
+dataset. The annotation was conducted with an interactive Python
+script.
+% \begin{figure}
+% \caption{Proportion of Arabic, French and Other tokens} % \centering
+% \includegraphics[scale=.5]{pi-tags.png}
+% \end{figure}
+
+\section{Potential Uses}
+The corpus provided is the first of its kind in that it is the first
+large corpus of romanized Arabic that is code-switched with another
+language. This has numerous potential uses in both the NLP community
+and the linguistics community. In the NLP community, the processing of
+informal text is becoming and increasingly popular task among
+researchers \cite{yang2013log}. This corpus adds another complication
+to informal text processing with the addition of code-switching. In
+the linguistics community, a corpus based analysis of a code-switched
+corpus offers the possibility to test various hypotheses on large
+number of documents. The MLF hypothesis has already been studied in
+bilingual speech corpora from Miami, Patagonia, and Wales (Carter,
+2010), but it will be necessary to study such theories in the context
+of many distinct languages and cultures to gain deeper insight into
+the code-switching phenomenon.
+
+
+\section{Conclusion and Future Work}
+The primary contribution of this paper is the release of a Algerian
+Arabic-French code-switched corpus. We have made use of a previously
+proposed annotation scheme for word level language identification and
+highlighted the unusual qualities of this corpus that make it a
+significant contribution to field. Future work in this line should
+largely focus on experiments using the corpus both in NLP and
+linguistics. It would also be of interest to construct and annotate
+similar corpora for other informal code-switched Arabic dialects.
+
+
+\bibliographystyle{lrec2006}
+\bibliography{arabic_codeswitch}
+
+\end{document}
+
